@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"encoding/xml"
 	"flag"
 	"fmt"
 	"io"
@@ -11,7 +12,8 @@ import (
 )
 
 type IPResponse struct {
-	IP string `json:"ip"`
+	XMLName xml.Name `json:"-" xml:"response"`
+	IP      string   `json:"ip" xml:"ip"`
 }
 
 type IPError struct {
@@ -45,7 +47,41 @@ func ipHandler(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	io.WriteString(res, string(b))
+	queryString := req.URL.Query()
+
+	var encoding string
+	if format, ok := queryString["f"]; ok {
+		encoding = format[0]
+	} else {
+		encoding = "json"
+	}
+
+	switch encoding {
+	case "json":
+		res.Header().Set(
+			"Content-type", "application/json",
+		)
+
+		b, err := json.Marshal(ipRes)
+		if err != nil {
+			fmt.Println("error:", err)
+		}
+
+		io.WriteString(res, string(b))
+	case "xml":
+		res.Header().Set(
+			"Content-type", "application/xml",
+		)
+
+		io.WriteString(res, xml.Header)
+		enc := xml.NewEncoder(res)
+		enc.Indent("  ", "    ")
+		if err := enc.Encode(ipRes); err != nil {
+			fmt.Printf("error: %v\n", err)
+		}
+	default:
+		http.Error(res, "Encoding responso to ["+encoding+"] is not implemented", http.StatusNotImplemented)
+	}
 }
 
 func main() {
