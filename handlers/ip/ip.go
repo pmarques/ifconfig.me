@@ -24,7 +24,7 @@ func Handler(res http.ResponseWriter, req *http.Request) {
 
 	ip, _, err := net.SplitHostPort(req.RemoteAddr)
 	if err != nil {
-		fmt.Printf("userip: %q is not IP:port", req.RemoteAddr)
+		http.Error(res, "Error parsing remote address ["+req.RemoteAddr+"]", http.StatusInternalServerError)
 		return
 	}
 
@@ -50,7 +50,7 @@ func Handler(res http.ResponseWriter, req *http.Request) {
 		b, err := json.Marshal(ipRes)
 		if err != nil {
 			fmt.Println("error:", err)
-			http.Error(res, "Internal server Error", 500)
+			http.Error(res, "Error encoding json", http.StatusInternalServerError)
 			return
 		}
 
@@ -65,7 +65,8 @@ func Handler(res http.ResponseWriter, req *http.Request) {
 		enc.Indent("  ", "    ")
 		if err := enc.Encode(ipRes); err != nil {
 			fmt.Printf("error: %v\n", err)
-			http.Error(res, "Internal server Error", 500)
+			http.Error(res, "Error encoding xml", http.StatusInternalServerError)
+			return
 		}
 	default:
 		http.Error(res, "Encoding responso to ["+encoding+"] is not implemented", http.StatusNotImplemented)
