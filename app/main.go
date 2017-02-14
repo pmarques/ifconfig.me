@@ -5,8 +5,8 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"net"
 	"log"
+	"net"
 	"net/http"
 )
 
