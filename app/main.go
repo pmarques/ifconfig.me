@@ -14,7 +14,14 @@ type IPResponse struct {
 	IP string `json:"ip"`
 }
 
+type IPError struct {
+	Error   int    `json:"error"`
+	Message string `json:"message"`
+}
+
 func ipHandler(res http.ResponseWriter, req *http.Request) {
+	log.Println(req.Proto, req.URL)
+
 	res.Header().Set(
 		"Content-type", "application/json",
 	)
@@ -34,6 +41,8 @@ func ipHandler(res http.ResponseWriter, req *http.Request) {
 	b, err := json.Marshal(ipRes)
 	if err != nil {
 		fmt.Println("error:", err)
+		http.Error(res, "Internal server Error", 500)
+		return
 	}
 
 	io.WriteString(res, string(b))
@@ -46,6 +55,24 @@ func main() {
 	// Parse command line arguments
 	flag.Parse()
 
+	// Log all the other requests and return 404
+	http.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
+		log.Println(req.Proto, req.URL)
+
+		var errorCode = 404
+		var e = IPError{
+			Error:   errorCode,
+			Message: fmt.Sprintf("Resource [%s] not found", req.URL.Path),
+		}
+		b, err := json.Marshal(e)
+		if err != nil {
+			fmt.Println("error:", err)
+			http.Error(res, "Internal server Error", 500)
+			return
+		}
+
+		http.Error(res, string(b), errorCode)
+	})
 	http.HandleFunc("/ip", ipHandler)
 
 	bindAddr := fmt.Sprintf("%s:%d", *listenAddr, *listenPort)
