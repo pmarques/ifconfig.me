@@ -79,3 +79,21 @@ func TestHandlerIPParseError(t *testing.T) {
 
 	// fmt.Printf("%d - %s", w.Code, w.Body.String())
 }
+
+func TestHandlerXForwardedFor(t *testing.T) {
+	req := httptest.NewRequest("GET", "http:example.com/ip", nil)
+	req.Header["X-Forwarded-For"] = []string{"1.1.1.1, 2.2.2.2"}
+	w := httptest.NewRecorder()
+	Handler(w, req)
+
+	if 200 != w.Code {
+		t.Error("Expected HTTP status code 200, got [", w.Code, "]")
+	}
+
+	// 192.0.2.0/24 is "TEST-NET" and is forced @ httptest.go
+	if `{"ip":"1.1.1.1"}` != w.Body.String() {
+		t.Error("Expected 1.5, got ", w.Body.String())
+	}
+
+	// fmt.Printf("%d - %s", w.Code, w.Body.String())
+}

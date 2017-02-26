@@ -8,6 +8,7 @@ import (
 	"log"
 	"net"
 	"net/http"
+	"strings"
 )
 
 // Response represents the response of IP information response
@@ -20,12 +21,18 @@ type Response struct {
 func Handler(res http.ResponseWriter, req *http.Request) {
 	log.Println(req.Proto, req.URL)
 
-	// TODO: use headers if behind proxy!, for instance req.Header.Get("X-FORWARDED-FOR")
+	var ip string
+	var err error
 
-	ip, _, err := net.SplitHostPort(req.RemoteAddr)
-	if err != nil {
-		http.Error(res, "Error parsing remote address ["+req.RemoteAddr+"]", http.StatusInternalServerError)
-		return
+	xffIPs := req.Header.Get("X-FORWARDED-FOR")
+	if xffIPs != "" {
+		ip = strings.Split(xffIPs, ",")[0]
+	} else {
+		ip, _, err = net.SplitHostPort(req.RemoteAddr)
+		if err != nil {
+			http.Error(res, "Error parsing remote address ["+req.RemoteAddr+"]", http.StatusInternalServerError)
+			return
+		}
 	}
 
 	ipRes := Response{
