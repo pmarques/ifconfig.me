@@ -1,9 +1,11 @@
-FROM golang:1.7.5
+FROM golang:1.9.2
 
-WORKDIR /go/src/github.com/pmarques/ifconfig.me/app/
-
-# this will ideally be built by the ONBUILD below ;)
-CMD ["go-wrapper", "run"]
-
+WORKDIR /go/src/github.com/pmarques/ifconfig.me/
 COPY . /go/src/github.com/pmarques/ifconfig.me/
-RUN go-wrapper install
+
+RUN CGO_ENABLED=0 GOOS=linux go build -installsuffix cgo -o ifconfig.me app/main.go
+
+FROM scratch
+COPY --from=0 /go/src/github.com/pmarques/ifconfig.me .
+EXPOSE 80
+ENTRYPOINT ["/ifconfig.me"]

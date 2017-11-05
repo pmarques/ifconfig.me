@@ -46,3 +46,8 @@ docker build -t ifconfig.me .
 ```bash
 docker run -p 8080:80 ifconfig.me
 ```
+
+# References
+
+* [Static Go Binaries](https://medium.com/@kelseyhightower/optimizing-docker-images-for-static-binaries-b5696e26eb07)
+* [Multi-stage Builds](https://docs.docker.com/engine/userguide/eng-image/multistage-build/#use-multi-stage-builds)
