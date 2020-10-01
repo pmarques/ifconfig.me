@@ -1,7 +1,7 @@
 # go version of ifconfig.me
 
 [ ![Codeship Status for pmarques/ifconfig.me](https://app.codeship.com/projects/c20e8030-a444-0135-0d5c-4a334dfc4b25/status?branch=master)](https://app.codeship.com/projects/255019)
-[![Build Status](https://semaphoreci.com/api/v1/pmarques/ifconfig-me/branches/master/badge.svg)](https://semaphoreci.com/pmarques/ifconfig-me)
+[![Build Status](https://pmarques.semaphoreci.com/badges/ifconfig.me/branches/master.svg)](https://pmarques.semaphoreci.com/projects/ifconfig.me)
 [![CircleCI](https://circleci.com/gh/pmarques/ifconfig.me.svg?style=svg)](https://circleci.com/gh/pmarques/ifconfig.me)
 [![Build Status](https://travis-ci.org/pmarques/ifconfig.me.svg?branch=master)](https://travis-ci.org/pmarques/ifconfig.me)
 
