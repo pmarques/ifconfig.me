@@ -53,6 +53,12 @@ docker build -t ifconfig.me .
 docker run -p 8080:80 ifconfig.me
 ```
 
+## Kubernetes
+
+```
+kubectl apply -f k8s-test.yaml
+```
+
 # References
 
 * [Static Go Binaries](https://medium.com/@kelseyhightower/optimizing-docker-images-for-static-binaries-b5696e26eb07)

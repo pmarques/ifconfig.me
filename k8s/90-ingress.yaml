@@ -1,0 +1,20 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ifconfig.me
+  namespace: ifconfig
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    # nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+spec:
+  rules:
+  - http:
+      paths:
+      - pathType: Prefix
+        path: /ifconfig/(.*)
+        backend:
+          service:
+            name: ifconfig-service
+            port:
+              number: 8080
