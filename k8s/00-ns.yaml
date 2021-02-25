@@ -19,3 +19,16 @@ spec:
       cpu: 200m
       memory: 100Mi
     type: Container
+
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: ifconfig
+  namespace: ifconfig
+spec:
+  hard:
+    requests.cpu: 500m
+    requests.memory: 500Mi
+    limits.cpu: 1000m
+    limits.memory: 1Gi
