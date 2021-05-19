@@ -1,0 +1,34 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ifconfig
+
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: ifconfig
+  namespace: ifconfig
+spec:
+  limits:
+  - min:
+      cpu: 100m
+      memory: 20Mi
+    max:
+      cpu: 200m
+      memory: 100Mi
+    type: Container
+
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: ifconfig
+  namespace: ifconfig
+spec:
+  hard:
+    requests.cpu: 500m
+    requests.memory: 500Mi
+    limits.cpu: 1000m
+    limits.memory: 1Gi

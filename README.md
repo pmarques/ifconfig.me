@@ -53,6 +53,21 @@ docker build -t ifconfig.me .
 docker run -p 8080:80 ifconfig.me
 ```
 
+## Kubernetes
+
+```
+kubectl apply -f k8s-test.yaml
+```
+
+### Debug container
+
+Since there is no OS or utils in the container we need to use Ephemeral Containers although it's currenlty in alpha. For
+more info check https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers/
+
+```
+kubectl debug -it ifconfig.me --image=busybox --target=ifconfig.me-9bf8x
+```
+
 # References
 
 * [Static Go Binaries](https://medium.com/@kelseyhightower/optimizing-docker-images-for-static-binaries-b5696e26eb07)
