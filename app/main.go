@@ -19,7 +19,7 @@ type Error struct {
 func main() {
 	listenPort := flag.Int("port", 80, "The port to bind http server")
 	listenAddr := flag.String("addr", "", "The addr to bind http server")
-	logFileName := flag.String("log-filename", "", "The filename where to write logs")
+	logFileName := flag.String("log-filename", os.Getenv("LOG_FILENAME"), "The filename where to write logs")
 
 	// Parse command line arguments
 	flag.Parse()
