@@ -4,6 +4,7 @@ name: Publish Container image to GH Packages
 on:
   push:
     branches:
+      - '*'
       - '!master'
 
 jobs:
