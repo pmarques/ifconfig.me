@@ -1,5 +1,5 @@
 ---
-name: docker-hub
+name: Publish Container image to DockerHub
 
 on:
   push:
@@ -8,6 +8,7 @@ on:
 
 jobs:
   docker:
+    name: Push Docker image to DockerHub
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,7 +29,7 @@ jobs:
           echo "Flags:     ${{ steps.buildx.outputs.flags }}"
           echo "Platforms: ${{ steps.buildx.outputs.platforms }}"
 
-      - name: Login to DockerHub
+      - name: Log in to DockerHub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -43,5 +44,5 @@ jobs:
           platforms: linux/amd64,linux/arm64
           tags: patrickfmarques/ifconfig.me:latest
 
-      - name: Available platforms
+      - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
