@@ -32,3 +32,28 @@ spec:
     requests.memory: 500Mi
     limits.cpu: 1000m
     limits.memory: 1Gi
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default
+  namespace: ifconfig
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+  egress:
+  # Allow Kube System DNS
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+      podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+    ports:
+    - protocol: TCP
+      port: 53
+    - protocol: UDP
+      port: 53
