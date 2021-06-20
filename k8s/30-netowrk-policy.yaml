@@ -24,4 +24,15 @@ spec:
     ports:
     - protocol: TCP
       port: 80
-  egress: []
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          common.k8s.elastic.co/type: elasticsearch
+          elasticsearch.k8s.elastic.co/cluster-name: elasticsearch-logging
+      namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: logging
+    ports:
+    - protocol: TCP
+      port: 9200

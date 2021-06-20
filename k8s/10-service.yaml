@@ -30,10 +30,41 @@ spec:
           requests:
             cpu: 100m
             memory: 100Mi
+        env:
+        - name: LOG_FILENAME
+          value: /var/log/ifconfig-me.log
         ports:
         - name: http
           containerPort: 80
+        volumeMounts:
+        - name: log-storage
+          mountPath: /var/log/
+      - name: log-collector
+        image: fluent/fluent-bit:1.7.9
+        env:
+        - name: ELASTICSEARCH_USER
+          valueFrom:
+            secretKeyRef:
+              name: elastic-credentials
+              key: elastic_username
+        - name: ELASTICSEARCH_PASS
+          valueFrom:
+            secretKeyRef:
+              name: elastic-credentials
+              key: elastic_password
+        volumeMounts:
+        - name: log-storage
+          mountPath: /var/log/
+          readOnly: true
+        - name: fluent-bit-config
+          mountPath: /fluent-bit/etc/
       terminationGracePeriodSeconds: 30
+      volumes:
+      - name: log-storage
+        emptyDir: {}
+      - name: fluent-bit-config
+        configMap:
+          name: fluent-bit-config
 
 ---
 apiVersion: v1
