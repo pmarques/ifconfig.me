@@ -18,8 +18,6 @@ func TestHandlerDefault(t *testing.T) {
 	if `{"ip":"192.0.2.1"}` != w.Body.String() {
 		t.Error("Expected 1.5, got ", w.Body.String())
 	}
-
-	// fmt.Printf("%d - %s", w.Code, w.Body.String())
 }
 
 func TestHandlerXML(t *testing.T) {
@@ -31,15 +29,12 @@ func TestHandlerXML(t *testing.T) {
 		t.Error("Expected HTTP status code 200, got [", w.Code, "]")
 	}
 
-	// 192.0.2.0/24 is "TEST-NET" and is forced @ httptest.go
 	if `<?xml version="1.0" encoding="UTF-8"?>
   <response>
       <ip>192.0.2.1</ip>
   </response>` != w.Body.String() {
 		t.Error("Expected 1.5, got ", w.Body.String())
 	}
-
-	// fmt.Printf("%d - %s", w.Code, w.Body.String())
 }
 
 func TestHandlerYaml(t *testing.T) {
@@ -51,13 +46,10 @@ func TestHandlerYaml(t *testing.T) {
 		t.Error("Expected HTTP status code 501, got [", w.Code, "]")
 	}
 
-	// 192.0.2.0/24 is "TEST-NET" and is forced @ httptest.go
 	if `Encoding responso to [yaml] is not implemented
 ` != w.Body.String() {
 		t.Error("Encoding responso to [yaml] is not implemented, got ", w.Body.String())
 	}
-
-	// fmt.Printf("\n\n%d - [%s]", w.Code, w.Body.String())
 }
 
 func TestHandlerIPParseError(t *testing.T) {
@@ -71,13 +63,10 @@ func TestHandlerIPParseError(t *testing.T) {
 		t.Error("Expected HTTP status code 500, got [", w.Code, "]")
 	}
 
-	// 192.0.2.0/24 is "TEST-NET" and is forced @ httptest.go
 	if `Error parsing remote address [123]
 ` != w.Body.String() {
 		t.Error("Expected 1.5, got [", w.Body.String(), "]")
 	}
-
-	// fmt.Printf("%d - %s", w.Code, w.Body.String())
 }
 
 func TestHandlerXForwardedFor(t *testing.T) {
@@ -90,10 +79,7 @@ func TestHandlerXForwardedFor(t *testing.T) {
 		t.Error("Expected HTTP status code 200, got [", w.Code, "]")
 	}
 
-	// 192.0.2.0/24 is "TEST-NET" and is forced @ httptest.go
 	if `{"ip":"1.1.1.1"}` != w.Body.String() {
 		t.Error("Expected 1.5, got ", w.Body.String())
 	}
-
-	// fmt.Printf("%d - %s", w.Code, w.Body.String())
 }
