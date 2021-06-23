@@ -1,3 +1,5 @@
+// +build gofuzzbeta
+
 package ip
 
 import (
@@ -83,4 +85,21 @@ func TestHandlerXForwardedFor(t *testing.T) {
 	if `{"ip":"1.1.1.1"}` != w.Body.String() {
 		t.Error(`Expected '{"ip":"1.1.1.1"}' got `, w.Body.String())
 	}
+}
+func FuzzHandler(f *testing.F) {
+	f.Add("1.1.1.1, 2.2.2.2")
+	f.Fuzz(func(t *testing.T, xForwardFor string) {
+		req := httptest.NewRequest("GET", "http:example.com/ip", nil)
+		req.Header["X-Forwarded-For"] = []string{xForwardFor}
+		w := httptest.NewRecorder()
+		Handler(w, req)
+
+		if 200 != w.Code {
+			t.Error("Expected HTTP status code 200, got [", w.Code, "]")
+		}
+
+		if `{"ip":"1.1.1.1"}` != w.Body.String() {
+			t.Error("Expected 1.5, got ", w.Body.String())
+		}
+	})
 }
