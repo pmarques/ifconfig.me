@@ -45,7 +45,7 @@ metadata:
     app: ifconfig.me
 spec:
   ports:
-  - port: 8080
+  - port: 80
     targetPort: http
     protocol: TCP
   selector:
