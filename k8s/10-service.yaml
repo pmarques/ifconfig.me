@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ifconfig.me
+  name: ifconfig
   namespace: ifconfig
   labels:
     app: ifconfig.me
@@ -39,7 +39,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ifconfig-service
+  name: ifconfig
   namespace: ifconfig
   labels:
     app: ifconfig.me
