@@ -26,6 +26,21 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
+  name: allow-ipv6
+  namespace: ifconfig
+spec:
+  podSelector:
+    matchLabels:
+      app: ifconfig.me
+  policyTypes:
+  - Ingress
+  ingress:
+  - {}
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
   name: allow-opentelemetry
   namespace: ifconfig
 spec:

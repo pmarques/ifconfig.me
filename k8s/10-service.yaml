@@ -77,3 +77,26 @@ spec:
     protocol: TCP
   selector:
     app: ifconfig.me
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ifconfig-ipv6
+  namespace: ifconfig
+  labels:
+    app: ifconfig.me
+spec:
+  externalTrafficPolicy: Local
+  ipFamilyPolicy: SingleStack
+  ipFamilies:
+  - IPv6
+  type: LoadBalancer
+  ports:
+  - appProtocol: http
+    name: http
+    port: 80
+    targetPort: http
+    protocol: TCP
+  selector:
+    app: ifconfig.me
