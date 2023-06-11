@@ -24,6 +24,8 @@ spec:
       containers:
       - name: ifconfig
         image: patrickfmarques/ifconfig.me:latest
+        securityContext:
+          runAsNonRoot: true
         resources:
           limits:
             memory: 100Mi
