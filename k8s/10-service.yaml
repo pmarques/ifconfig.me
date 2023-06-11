@@ -26,6 +26,7 @@ spec:
         image: patrickfmarques/ifconfig.me:latest
         securityContext:
           runAsNonRoot: true
+          allowPrivilegeEscalation: false
           capabilities:
             drop:
               - ALL
