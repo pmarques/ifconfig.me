@@ -62,11 +62,11 @@ kubectl apply -f k8s-test.yaml
 
 ### Debug container
 
-Since there is no OS or utils in the container we need to use Ephemeral Containers although it's currenlty in alpha. For
+Since there is no OS or utils in the container we need to use Ephemeral Containers. For
 more info check https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers/
 
 ```
-kubectl debug -it ifconfig.me --image=busybox --target=ifconfig.me-9bf8x
+kubectl -n ifconfig debug -it ifconfig-646c744cbc-8nkfn --image=busybox --target=ifconfig
 ```
 
 # References
