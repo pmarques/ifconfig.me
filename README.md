@@ -54,7 +54,7 @@ docker run -p 8080:80 ifconfig.me
 ## Kubernetes
 
 ```
-kubectl apply -f k8s-test.yaml
+kubectl apply -f k8s
 ```
 
 ### Debug container
