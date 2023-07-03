@@ -21,3 +21,28 @@ spec:
     ports:
     - protocol: TCP
       port: 80
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-opentelemetry
+  namespace: ifconfig
+spec:
+  podSelector:
+    matchLabels:
+      app: ifconfig.me
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: opentelemetry-collector
+      namespaceSelector:
+        matchLabels:
+           kubernetes.io/metadata.name: observability
+    ports:
+    - protocol: TCP
+      port: 4317
+      endPort: 4318
