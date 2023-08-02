@@ -1,4 +1,4 @@
-FROM golang:1.20.6
+FROM golang:1.20.7
 
 WORKDIR /go/src/github.com/pmarques/ifconfig.me/
 COPY . /go/src/github.com/pmarques/ifconfig.me/
