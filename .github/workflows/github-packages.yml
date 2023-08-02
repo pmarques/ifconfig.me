@@ -2,6 +2,8 @@
 name: Publish Container image to GH Packages
 
 on:
+  pull_request:
+    branches: [master]
   push:
     branches:
       - '*'
