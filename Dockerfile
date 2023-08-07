@@ -16,5 +16,7 @@ RUN go test -v ./...
 FROM scratch
 USER 1000:1000
 COPY --from=0 /go/src/github.com/pmarques/ifconfig.me .
+
 EXPOSE 80
+
 ENTRYPOINT ["/ifconfig.me"]
