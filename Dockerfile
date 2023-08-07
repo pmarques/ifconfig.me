@@ -3,7 +3,10 @@ FROM golang:1.20.7-alpine
 WORKDIR /go/src/github.com/pmarques/ifconfig.me/
 COPY . /go/src/github.com/pmarques/ifconfig.me/
 
-RUN CGO_ENABLED=0 GOOS=linux go build -installsuffix cgo -o ifconfig.me app/main.go
+ARG CGO_ENABLED=0
+ARG GOOS=linux
+ARG GOARCH=arm64
+RUN go build -installsuffix cgo -o ifconfig.me app/main.go
 
 RUN go test -v ./...
 
