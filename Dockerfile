@@ -1,4 +1,4 @@
-FROM golang:1.20.7-alpine
+FROM golang:1.21.0-alpine
 
 WORKDIR /go/src/github.com/pmarques/ifconfig.me/
 COPY go.mod /go/src/github.com/pmarques/ifconfig.me/
