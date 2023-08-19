@@ -4,6 +4,8 @@
 [![Build Status](https://pmarques.semaphoreci.com/badges/ifconfig.me/branches/master.svg)](https://pmarques.semaphoreci.com/projects/ifconfig.me)
 [![CircleCI](https://circleci.com/gh/pmarques/ifconfig.me.svg?style=svg)](https://circleci.com/gh/pmarques/ifconfig.me)
 
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/pmarques/ifconfig.me/badge)](https://api.securityscorecards.dev/projects/github.com/pmarques/ifconfig.me)
+
 This was my first project using go, a simple HTTP server that returns your public IP address.
 I'm using this project for demos and learning about Docker, Go and experiment some workflows.
 
