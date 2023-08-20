@@ -1,8 +1,7 @@
-// +build gofuzzbeta
-
 package ip
 
 import (
+	"encoding/json"
 	"net/http/httptest"
 	"testing"
 )
@@ -86,8 +85,12 @@ func TestHandlerXForwardedFor(t *testing.T) {
 		t.Error(`Expected '{"ip":"1.1.1.1"}' got `, w.Body.String())
 	}
 }
+
 func FuzzHandler(f *testing.F) {
+	f.Add("1.1.1.1")
+	f.Add("2.2.2.2")
 	f.Add("1.1.1.1, 2.2.2.2")
+	f.Add("1.1.1.1, 2.2.2.2, 3.3.3.3")
 	f.Fuzz(func(t *testing.T, xForwardFor string) {
 		req := httptest.NewRequest("GET", "http:example.com/ip", nil)
 		req.Header["X-Forwarded-For"] = []string{xForwardFor}
@@ -98,8 +101,8 @@ func FuzzHandler(f *testing.F) {
 			t.Error("Expected HTTP status code 200, got [", w.Code, "]")
 		}
 
-		if `{"ip":"1.1.1.1"}` != w.Body.String() {
-			t.Error("Expected 1.5, got ", w.Body.String())
+		if !json.Valid([]byte(w.Body.Bytes())) {
+			t.Error("Invalid JSON ", w.Body.String())
 		}
 	})
 }
