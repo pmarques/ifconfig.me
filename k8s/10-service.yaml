@@ -43,6 +43,11 @@ spec:
           requests:
             cpu: 100m
             memory: 100Mi
+        env:
+        - name: OTEL_SERVICE_NAME
+          value: ifconfig
+        - name: OTEL_EXPORTER_OTLP_ENDPOINT
+          value: http://opentelemetry-collector.observability.svc:4318
         ports:
         - name: http
           containerPort: 8080
