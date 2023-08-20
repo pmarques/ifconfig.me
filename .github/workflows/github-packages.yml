@@ -9,6 +9,9 @@ on:
       - '*'
       - '!master'
 
+permissions:
+  contents: read
+
 jobs:
   gh_container_registry:
     name: Push Docker image to GitHub Packages
