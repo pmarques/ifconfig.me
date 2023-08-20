@@ -72,12 +72,12 @@ func main() {
 
 	// Log all the other requests and return 404
 	http.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
-		log.Println(req.Proto, req.URL)
+		log.Println(req.Proto, req.URL.EscapedPath())
 
 		var errorCode = 404
 		var e = Error{
 			Error:   errorCode,
-			Message: fmt.Sprintf("Resource [%s] not found", req.URL.Path),
+			Message: fmt.Sprintf("Resource [%s] not found", req.URL.EscapedPath()),
 		}
 		b, err := json.Marshal(e)
 		if err != nil {

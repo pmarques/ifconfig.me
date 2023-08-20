@@ -19,7 +19,7 @@ type Response struct {
 
 // Handler to process ip information request
 func Handler(res http.ResponseWriter, req *http.Request) {
-	log.Println(req.Proto, req.URL)
+	log.Println(req.Proto, req.URL.EscapedPath())
 
 	var ip string
 	var err error
