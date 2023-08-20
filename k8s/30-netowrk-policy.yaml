@@ -10,9 +10,7 @@ spec:
       app: ifconfig.me
   policyTypes:
   - Ingress
-  - Egress
   ingress:
-  # Allow connections from the ingress only
   - from:
     - podSelector:
         matchLabels:
@@ -23,4 +21,3 @@ spec:
     ports:
     - protocol: TCP
       port: 80
-  egress: []

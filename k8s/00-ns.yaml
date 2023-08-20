@@ -37,14 +37,13 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: default
+  name: allow-k8s-dns
   namespace: ifconfig
 spec:
   podSelector: {}
   policyTypes:
   - Egress
   egress:
-  # Allow Kube System DNS
   - to:
     - namespaceSelector:
         matchLabels:
