@@ -4,9 +4,8 @@ go 1.16
 
 require (
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.15.2 // indirect
-	github.com/stretchr/testify v1.8.4 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.42.0
-	go.opentelemetry.io/otel v1.16.0
+	go.opentelemetry.io/otel v1.17.0
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace v1.16.0
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp v1.16.0
 	go.opentelemetry.io/otel/sdk v1.16.0
