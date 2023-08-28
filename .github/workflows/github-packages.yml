@@ -43,7 +43,7 @@ jobs:
         uses: docker/build-push-action@2eb1c1961a95fc15694676618e422e8ba1d63825 # v4.1.1
         with:
           context: .
-          push: true
+          push: false
           tags: ghcr.io/${{ github.repository }}/ghcr-test:${{ github.sha }}
 
       - name: Sign the images with GitHub OIDC Token
