@@ -55,7 +55,7 @@ jobs:
       - name: Sign the images with GitHub OIDC Token
         env:
           DIGEST: ${{ steps.docker_build.outputs.digest }}
-          TAGS: ifconfig.me
+          TAGS: patrickfmarques/ifconfig.me
         run: cosign sign --yes "${TAGS}@${DIGEST}"
 
       - name: Image digest
