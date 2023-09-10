@@ -15,7 +15,7 @@ blocks:
       jobs:
         - name: go test
           commands:
-            - sem-version go 1.20
+            - sem-version go 1.21
             - checkout
             - go get -v -t -d ./...
             - go test -v ./...
