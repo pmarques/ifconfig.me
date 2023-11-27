@@ -43,6 +43,10 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Generate data time for docker tag
+        id: datatime
+        run: echo "DATETIME=$(date +'%Y%m%d%H%M')" >> "${GITHUB_OUTPUT}"
+
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@4a13e500e55cf31b7a5d59a38ab2040ab0f42f56 # v5.1.0
@@ -51,7 +55,7 @@ jobs:
           push: true
           sbom: true
           platforms: linux/amd64,linux/arm64
-          tags: patrickfmarques/ifconfig.me:latest
+          tags: patrickfmarques/ifconfig.me:1.0.0-${{ steps.datatime.outputs.DATETIME }}
 
       - name: Sign the images with GitHub OIDC Token
         env:
