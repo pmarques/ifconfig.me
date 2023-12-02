@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "ifconfig.me web server",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "app/main.go",
+      "args": [
+        // NOTE: It cannot run on port 80 inside Codespaces as non-root
+        "--port",
+        "9000"
+      ]
+    }
+  ]
+}
