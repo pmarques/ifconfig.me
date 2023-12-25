@@ -1,5 +1,5 @@
 ARG BUILDKIT_SBOM_SCAN_CONTEXT=true
-FROM golang:1.21.5-alpine3.18@sha256:9390a996e9f957842f07dff1e9661776702575dd888084e72d86eaa382ad56e3
+FROM golang:1.21.5-alpine3.18@sha256:d8b99943fb0587b79658af03d4d4e8b57769b21dcf08a8401352a9f2a7228754
 
 WORKDIR /go/src/github.com/pmarques/ifconfig.me/
 COPY go.mod /go/src/github.com/pmarques/ifconfig.me/
