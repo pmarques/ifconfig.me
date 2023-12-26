@@ -2,7 +2,6 @@
 resources:
 - 00-ns.yaml
 - 10-service.yaml
-# - 20-hpa.yaml
 - 30-netowrk-policy.yaml
 - 90-ingress.yaml
 
