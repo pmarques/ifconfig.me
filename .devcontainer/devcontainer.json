@@ -15,7 +15,8 @@
     // Configure properties specific to VS Code.
     "vscode": {
       "extensions": [
-        "EditorConfig.EditorConfig"
+        "EditorConfig.EditorConfig",
+        "github.vscode-github-actions"
       ]
     }
   },
