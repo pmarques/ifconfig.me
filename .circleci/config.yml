@@ -2,8 +2,8 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cimg/go:1.21.1
-      
+      - image: cimg/go:1.22.0
+
     steps:
       - checkout
       - run: go get -v -t -d ./...
