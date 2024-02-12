@@ -6,6 +6,12 @@ on:
     branches:
       - '**'
       - '!master'
+    paths-ignore:
+      - '.circleci/**'
+      - '.github/**'
+      - '.k8s/**'
+      - '.vscode/**'
+      - '*.md'
   schedule:
     - cron: '0 1 * * 0'
 
