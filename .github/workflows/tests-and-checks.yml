@@ -9,6 +9,7 @@ on:
     paths-ignore:
       - '.circleci/**'
       - '.github/**'
+      - '!.github/workflows/tests-and-checks.yml'
       - '.k8s/**'
       - '.vscode/**'
       - '*.md'
