@@ -60,7 +60,7 @@ jobs:
         uses: actions/attest-build-provenance@v1
         id: attest
         with:
-          subject-name: ghcr.io/${{ github.repository }}
+          subject-name: ghcr.io/${{ github.repository }}/ghcr-test
           subject-digest: ${{ steps.docker_build.outputs.digest }}
           push-to-registry: true
 
