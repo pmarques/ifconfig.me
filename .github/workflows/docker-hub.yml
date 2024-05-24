@@ -70,7 +70,7 @@ jobs:
         uses: actions/attest-build-provenance@173725a1209d09b31f9d30a3890cf2757ebbff0d  # v1.1.2
         id: attest
         with:
-          subject-name: index.docker.io/${{ github.repository }}
+          subject-name: index.docker.io/patrickfmarques/ifconfig.me
           subject-digest: ${{ steps.docker_build.outputs.digest }}
           push-to-registry: true
 
