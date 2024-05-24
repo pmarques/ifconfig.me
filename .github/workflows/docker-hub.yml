@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       id-token: write # needed for signing the images with GitHub OIDC Token
+      attestations: write
     steps:
       - name: Checkout
         uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
@@ -64,6 +65,14 @@ jobs:
           DIGEST: ${{ steps.docker_build.outputs.digest }}
           TAGS: patrickfmarques/ifconfig.me
         run: cosign sign --yes "${TAGS}@${DIGEST}"
+
+      - name: Attest
+        uses: actions/attest-build-provenance@173725a1209d09b31f9d30a3890cf2757ebbff0d  # v1.1.2
+        id: attest
+        with:
+          subject-name: index.docker.io/patrickfmarques/ifconfig.me
+          subject-digest: ${{ steps.docker_build.outputs.digest }}
+          push-to-registry: true
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
