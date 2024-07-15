@@ -67,7 +67,7 @@ jobs:
         run: cosign sign --yes "${TAGS}@${DIGEST}"
 
       - name: Attest
-        uses: actions/attest-build-provenance@bdd51370e0416ac948727f861e03c2f05d32d78e  # v1.3.2
+        uses: actions/attest-build-provenance@5e9cb68e95676991667494a6a4e59b8a2f13e1d0  # v1.3.3
         id: attest
         with:
           subject-name: index.docker.io/patrickfmarques/ifconfig.me
