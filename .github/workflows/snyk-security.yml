@@ -1,0 +1,45 @@
+name: Snyk Security
+
+on:
+  push:
+    branches:
+    - "master"
+  pull_request:
+    branches:
+    - "master"
+
+permissions:
+  contents: read
+
+jobs:
+  snyk:
+    permissions:
+      contents: read # for actions/checkout to fetch code
+      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
+    runs-on: ubuntu-24.04
+    env:
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      SNYK_CFG_ORG: ${{ secrets.SNYK_CFG_ORG }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Set up Snyk CLI to check for security issues
+        uses: snyk/actions/setup@b98d498629f1c368650224d6d212bf7dfa89e4bf #v0.4.0
+
+      # Runs Snyk Open Source (SCA) analysis and uploads result to Snyk.
+      - name: Snyk Open Source monitor
+        run: snyk monitor --all-projects
+
+      # Runs Snyk Infrastructure as Code (IaC) analysis and uploads result to Snyk.
+      # Use || true to not fail the pipeline.
+      - name: Snyk IaC test and report
+        run: snyk iac test --report k8s || true
+
+      # Build the docker image for testing
+      - name: Build a Docker image
+        run: docker build -t image-to-test .
+
+      # Runs Snyk Container (Container and SCA) analysis and uploads result to Snyk.
+      - name: Snyk Container monitor
+        run: snyk container monitor image-to-test --file=Dockerfile
