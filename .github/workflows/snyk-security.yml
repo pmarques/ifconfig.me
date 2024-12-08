@@ -27,6 +27,10 @@ jobs:
       - name: Set up Snyk CLI to check for security issues
         uses: snyk/actions/setup@b98d498629f1c368650224d6d212bf7dfa89e4bf #v0.4.0
 
+      # Runs Snyk Code (SAST) analysis and uploads result into GitHub.
+      - name: Snyk Code test
+        run: snyk code test --sarif > snyk-code.sarif
+
       # Runs Snyk Open Source (SCA) analysis and uploads result to Snyk.
       - name: Snyk Open Source monitor
         run: snyk monitor --all-projects
@@ -43,3 +47,8 @@ jobs:
       # Runs Snyk Container (Container and SCA) analysis and uploads result to Snyk.
       - name: Snyk Container monitor
         run: snyk container monitor image-to-test --file=Dockerfile
+
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@0b21cf2492b6b02c465a3e5d7c473717ad7721ba # v3.23.1
+        with:
+          sarif_file: snyk-code.sarif
