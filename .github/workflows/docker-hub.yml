@@ -18,6 +18,8 @@ jobs:
     permissions:
       id-token: write # needed for signing the images with GitHub OIDC Token
       attestations: write
+      # Needed to upload the results to code-scanning dashboard.
+      security-events: write
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
