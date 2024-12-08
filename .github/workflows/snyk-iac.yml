@@ -4,9 +4,13 @@ on:
   push:
     branches:
       - 'master'
+    paths:
+      - 'k8s/**'
   pull_request:
     branches:
       - master
+    paths:
+      - 'k8s/**'
 
 permissions:
   contents: read
