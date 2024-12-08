@@ -7,12 +7,14 @@ on:
   pull_request:
     branches: [master]
 
+permissions:
+  contents: read
+
 jobs:
   security:
     runs-on: ubuntu-24.04
 
     permissions:
-      contents: read
       # Needed to upload the results to code-scanning dashboard.
       security-events: write
 
