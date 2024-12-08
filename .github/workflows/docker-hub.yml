@@ -88,7 +88,7 @@ jobs:
           # or you can signup for free at https://snyk.io/login
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          image: ghcr.io/${{ github.repository }}/ghcr-test:${{ github.sha }}
+          image: patrickfmarques/ifconfig.me:1.0.0-${{ steps.datatime.outputs.DATETIME }}
           args: --file=Dockerfile
 
       - name: Upload result to GitHub Code Scanning
