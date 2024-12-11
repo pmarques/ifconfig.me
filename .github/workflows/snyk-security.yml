@@ -29,7 +29,7 @@ jobs:
 
       # Runs Snyk Code (SAST) analysis and uploads result into GitHub.
       - name: Snyk Code test
-        run: snyk code test --sarif > snyk-code.sarif
+        run: snyk code test --sarif-file-output snyk-code.sarif
 
       # Runs Snyk Open Source (SCA) analysis and uploads result to Snyk.
       - name: Snyk Open Source monitor
