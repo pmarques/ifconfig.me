@@ -1,6 +1,7 @@
 module github.com/pmarques/ifconfig.me
 
-go 1.22
+go 1.22.7
+
 toolchain go1.23.1
 
 require (
