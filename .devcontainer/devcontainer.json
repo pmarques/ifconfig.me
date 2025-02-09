@@ -5,6 +5,11 @@
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   "image": "mcr.microsoft.com/devcontainers/go:1.22-bookworm",
 
+  "remoteEnv": {
+    "PODMAN_USERNS": "keep-id"
+  },
+  "containerUser": "vscode",
+
   "customizations": {
     "codespaces": {
       "openFiles": [
