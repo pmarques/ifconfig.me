@@ -27,12 +27,12 @@ jobs:
       - id: govulncheck
         uses: golang/govulncheck-action@b625fbe08f3bccbe446d94fbf87fcc875a4f50ee # v1
         with:
-          go-version-input: 1.23
+          go-version-input: 1.24
 
   tests:
     strategy:
       matrix:
-        go: [ '~1.22', '~1.23' ]
+        go: [ '~1.24', '~1.24' ]
     runs-on: ubuntu-latest
     name: Run tests with go version ${{ matrix.go }}
     steps:
