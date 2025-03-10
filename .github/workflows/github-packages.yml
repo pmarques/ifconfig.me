@@ -57,7 +57,7 @@ jobs:
         run: cosign sign --yes "${TAGS}@${DIGEST}"
 
       - name: Attest
-        uses: actions/attest-build-provenance@520d128f165991a6c774bcb264f323e3d70747f4  # v2.2.0
+        uses: actions/attest-build-provenance@c074443f1aee8d4aeeae555aebba3282517141b2  # v2.2.3
         id: attest
         with:
           subject-name: ghcr.io/${{ github.repository }}/ghcr-test
