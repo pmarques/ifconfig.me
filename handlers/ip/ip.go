@@ -11,6 +11,25 @@ import (
 	"strings"
 )
 
+const (
+	formatJSON = "json"
+	formatXML  = "xml"
+)
+
+// getClientIP retrieves the client's IP address from the request.
+// It checks the "X-FORWARDED-FOR" header first, then falls back to RemoteAddr.
+func getClientIP(req *http.Request) (string, error) {
+	xffIPs := req.Header.Get("X-FORWARDED-FOR")
+	if xffIPs != "" {
+		return strings.Split(xffIPs, ",")[0], nil
+	}
+	ip, _, err := net.SplitHostPort(req.RemoteAddr)
+	if err != nil {
+		return "", fmt.Errorf("Error parsing remote address [%s]: %w", req.RemoteAddr, err)
+	}
+	return ip, nil
+}
+
 // Response represents the response of IP information response
 type Response struct {
 	XMLName xml.Name `json:"-" xml:"response"`
@@ -21,18 +40,11 @@ type Response struct {
 func Handler(res http.ResponseWriter, req *http.Request) {
 	log.Println(req.Proto, req.URL)
 
-	var ip string
-	var err error
-
-	xffIPs := req.Header.Get("X-FORWARDED-FOR")
-	if xffIPs != "" {
-		ip = strings.Split(xffIPs, ",")[0]
-	} else {
-		ip, _, err = net.SplitHostPort(req.RemoteAddr)
-		if err != nil {
-			http.Error(res, "Error parsing remote address ["+req.RemoteAddr+"]", http.StatusInternalServerError)
-			return
-		}
+	ip, err := getClientIP(req)
+	if err != nil {
+		log.Printf("Error getting client IP: %v", err)
+		http.Error(res, "Error retrieving client IP", http.StatusInternalServerError)
+		return
 	}
 
 	ipRes := Response{
@@ -45,11 +57,11 @@ func Handler(res http.ResponseWriter, req *http.Request) {
 	if format, ok := queryString["f"]; ok {
 		encoding = format[0]
 	} else {
-		encoding = "json"
+		encoding = formatJSON // Default to JSON
 	}
 
 	switch encoding {
-	case "json":
+	case formatJSON:
 		res.Header().Set(
 			"Content-type", "application/json",
 		)
@@ -62,7 +74,7 @@ func Handler(res http.ResponseWriter, req *http.Request) {
 		}
 
 		io.WriteString(res, string(b))
-	case "xml":
+	case formatXML:
 		res.Header().Set(
 			"Content-type", "application/xml",
 		)
@@ -76,6 +88,6 @@ func Handler(res http.ResponseWriter, req *http.Request) {
 			return
 		}
 	default:
-		http.Error(res, "Encoding responso to ["+encoding+"] is not implemented", http.StatusNotImplemented)
+		http.Error(res, fmt.Sprintf("Encoding response to [%s] is not implemented", encoding), http.StatusNotImplemented)
 	}
 }
