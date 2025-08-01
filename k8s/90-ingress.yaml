@@ -12,7 +12,7 @@ spec:
   rules:
   - http:
       paths:
-      - pathType: Prefix
+      - pathType: ImplementationSpecific
         path: /ifconfig/(.*)
         backend:
           service:
