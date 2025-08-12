@@ -22,7 +22,7 @@ jobs:
       SNYK_CFG_ORG: ${{ secrets.SNYK_CFG_ORG }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Set up Snyk CLI to check for security issues
         uses: snyk/actions/setup@b98d498629f1c368650224d6d212bf7dfa89e4bf #v0.4.0
