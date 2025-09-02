@@ -81,7 +81,7 @@ func main() {
 		}
 		b, err := json.Marshal(e)
 		if err != nil {
-			fmt.Println("error:", err)
+			log.Printf("Error marshalling JSON for not found response (URL: %s): %v", req.URL.Path, err)
 			http.Error(res, "Internal server Error", 500)
 			return
 		}
