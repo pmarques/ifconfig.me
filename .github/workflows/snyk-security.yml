@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Set up Snyk CLI to check for security issues
-        uses: snyk/actions/setup@b98d498629f1c368650224d6d212bf7dfa89e4bf #v0.4.0
+        uses: snyk/actions/setup@9adf32b1121593767fc3c057af55b55db032dc04 #v1.0.0
 
       # Runs Snyk Code (SAST) analysis and uploads result into GitHub.
       - name: Snyk Code test

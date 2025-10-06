@@ -28,7 +28,7 @@ jobs:
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Run Snyk to check IAC
-        uses: snyk/actions/iac@b98d498629f1c368650224d6d212bf7dfa89e4bf #v0.4.0
+        uses: snyk/actions/iac@9adf32b1121593767fc3c057af55b55db032dc04 #v1.0.0
         continue-on-error: true # To make sure that SARIF upload gets called
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
