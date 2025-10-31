@@ -4,7 +4,7 @@
   "name": "Go",
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   // https://mcr.microsoft.com/en-us/artifact/mar/devcontainers/go/tags
-  "image": "mcr.microsoft.com/devcontainers/go:1.24-bookworm",
+  "image": "mcr.microsoft.com/devcontainers/go:1.25-bookworm",
 
   "remoteEnv": {
     "PODMAN_USERNS": "keep-id"
