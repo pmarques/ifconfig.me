@@ -48,9 +48,9 @@ func TestHandlerYaml(t *testing.T) {
 		t.Error("Expected HTTP status code 501, got [", w.Code, "]")
 	}
 
-	if `Encoding responso to [yaml] is not implemented
+	if `Encoding response to [yaml] is not implemented
 ` != w.Body.String() {
-		t.Error(`Expected "Encoding responso to [yaml] is not implemented", got `, w.Body.String())
+		t.Error(`Expected "Encoding response to [yaml] is not implemented", got `, w.Body.String())
 	}
 }
 
@@ -65,9 +65,10 @@ func TestHandlerIPParseError(t *testing.T) {
 		t.Error("Expected HTTP status code 500, got [", w.Code, "]")
 	}
 
-	if `Error parsing remote address [123]
+	if `Error retrieving client IP
 ` != w.Body.String() {
-		t.Error(`Expected "Error parsing remote address [123]", got [`, w.Body.String(), "]")
+		t.Error(`Expected "Error retrieving client IP
+", got [`, w.Body.String(), "]")
 	}
 }
 
