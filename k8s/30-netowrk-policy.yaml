@@ -14,10 +14,7 @@ spec:
   - from:
     - podSelector:
         matchLabels:
-          app.kubernetes.io/component: controller
-      namespaceSelector:
-        matchLabels:
-          app.kubernetes.io/name: ingress-nginx
+          gateway.envoyproxy.io/owning-gateway-name: public
     ports:
     - protocol: TCP
       port: 80

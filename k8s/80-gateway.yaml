@@ -1,0 +1,18 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: ifconfig-wildcard
+  namespace: ifconfig
+spec:
+  parentRefs:
+  - name: public
+    kind: Gateway
+    namespace: ingress-gateway
+    sectionName: wildcard-ingress
+  hostnames:
+  - ifconfig.k8s.pmarques.info
+  rules:
+  - backendRefs:
+    - name: ifconfig
+      port: 80
