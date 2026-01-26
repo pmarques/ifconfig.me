@@ -54,14 +54,11 @@ func Handler(res http.ResponseWriter, req *http.Request) {
 			"Content-type", "application/json",
 		)
 
-		b, err := json.Marshal(ipRes)
-		if err != nil {
+		if err := json.NewEncoder(res).Encode(ipRes); err != nil {
 			fmt.Println("error:", err)
 			http.Error(res, "Error encoding json", http.StatusInternalServerError)
 			return
 		}
-
-		io.WriteString(res, string(b))
 	case "xml":
 		res.Header().Set(
 			"Content-type", "application/xml",
@@ -76,6 +73,6 @@ func Handler(res http.ResponseWriter, req *http.Request) {
 			return
 		}
 	default:
-		http.Error(res, "Encoding responso to ["+encoding+"] is not implemented", http.StatusNotImplemented)
+		http.Error(res, "Encoding response to ["+encoding+"] is not implemented", http.StatusNotImplemented)
 	}
 }
