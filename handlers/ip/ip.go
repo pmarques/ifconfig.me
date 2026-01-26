@@ -54,14 +54,11 @@ func Handler(res http.ResponseWriter, req *http.Request) {
 			"Content-type", "application/json",
 		)
 
-		b, err := json.Marshal(ipRes)
-		if err != nil {
+		if err := json.NewEncoder(res).Encode(ipRes); err != nil {
 			fmt.Println("error:", err)
 			http.Error(res, "Error encoding json", http.StatusInternalServerError)
 			return
 		}
-
-		res.Write(b)
 	case "xml":
 		res.Header().Set(
 			"Content-type", "application/xml",

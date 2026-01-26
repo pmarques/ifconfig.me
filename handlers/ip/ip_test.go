@@ -16,8 +16,9 @@ func TestHandlerDefault(t *testing.T) {
 	}
 
 	// 192.0.2.0/24 is "TEST-NET" and is forced @ httptest.go
-	if `{"ip":"192.0.2.1"}` != w.Body.String() {
-		t.Error(`Expected '{"ip":"192.0.2.1"}', got [`, w.Body.String(), "]")
+	if `{"ip":"192.0.2.1"}
+` != w.Body.String() {
+		t.Error(`Expected '{"ip":"192.0.2.1"}\n', got [`, w.Body.String(), "]")
 	}
 }
 
@@ -81,8 +82,9 @@ func TestHandlerXForwardedFor(t *testing.T) {
 		t.Error("Expected HTTP status code 200, got [", w.Code, "]")
 	}
 
-	if `{"ip":"1.1.1.1"}` != w.Body.String() {
-		t.Error(`Expected '{"ip":"1.1.1.1"}' got `, w.Body.String())
+	if `{"ip":"1.1.1.1"}
+` != w.Body.String() {
+		t.Error(`Expected '{"ip":"1.1.1.1"}\n' got `, w.Body.String())
 	}
 }
 
