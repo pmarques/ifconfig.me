@@ -16,6 +16,7 @@ spec:
       labels:
         app: ifconfig.me
     spec:
+      automountServiceAccountToken: false
       containers:
       - name: ifconfig
         image: patrickfmarques/ifconfig.me:latest
