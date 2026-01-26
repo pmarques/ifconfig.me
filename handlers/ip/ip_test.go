@@ -48,9 +48,9 @@ func TestHandlerYaml(t *testing.T) {
 		t.Error("Expected HTTP status code 501, got [", w.Code, "]")
 	}
 
-	if `Encoding responso to [yaml] is not implemented
+	if `Encoding response to [yaml] is not implemented
 ` != w.Body.String() {
-		t.Error(`Expected "Encoding responso to [yaml] is not implemented", got `, w.Body.String())
+		t.Error(`Expected "Encoding response to [yaml] is not implemented", got `, w.Body.String())
 	}
 }
 

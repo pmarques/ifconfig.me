@@ -93,7 +93,7 @@ func main() {
 	http.Handle("/ip", wrappedIpHandler)
 
 	bindAddr := fmt.Sprintf("%s:%d", *listenAddr, *listenPort)
-	fmt.Println(`Start listenning at "` + bindAddr + `"`)
+	fmt.Println(`Start listening at "` + bindAddr + `"`)
 
 	log.Fatal(http.ListenAndServe(bindAddr, nil))
 }

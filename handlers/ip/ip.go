@@ -76,6 +76,6 @@ func Handler(res http.ResponseWriter, req *http.Request) {
 			return
 		}
 	default:
-		http.Error(res, "Encoding responso to ["+encoding+"] is not implemented", http.StatusNotImplemented)
+		http.Error(res, "Encoding response to ["+encoding+"] is not implemented", http.StatusNotImplemented)
 	}
 }
