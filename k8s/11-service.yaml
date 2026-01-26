@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ifconfig
+  namespace: ifconfig
+  labels:
+    app: ifconfig.me
+spec:
+  ports:
+  - port: 80
+    targetPort: http
+    protocol: TCP
+  selector:
+    app: ifconfig.me

@@ -16,11 +16,7 @@ spec:
       labels:
         app: ifconfig.me
     spec:
-      tolerations:
-      # this toleration is to have the daemonset runnable on master nodes
-      # remove it if your masters can't run pods
-      # - key: node-role.kubernetes.io/master
-      #   effect: NoSchedule
+      automountServiceAccountToken: false
       containers:
       - name: ifconfig
         image: patrickfmarques/ifconfig.me:latest
@@ -34,8 +30,6 @@ spec:
           capabilities:
             drop:
               - ALL
-            add:
-              - NET_BIND_SERVICE
         resources:
           limits:
             cpu: 200m
@@ -59,21 +53,10 @@ spec:
           failureThreshold: 2
           periodSeconds: 30
           terminationGracePeriodSeconds: 1
-
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 2
+          periodSeconds: 10
       terminationGracePeriodSeconds: 30
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: ifconfig
-  namespace: ifconfig
-  labels:
-    app: ifconfig.me
-spec:
-  ports:
-  - port: 80
-    targetPort: http
-    protocol: TCP
-  selector:
-    app: ifconfig.me
