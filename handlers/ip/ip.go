@@ -61,7 +61,7 @@ func Handler(res http.ResponseWriter, req *http.Request) {
 			return
 		}
 
-		io.WriteString(res, string(b))
+		res.Write(b)
 	case "xml":
 		res.Header().Set(
 			"Content-type", "application/xml",
