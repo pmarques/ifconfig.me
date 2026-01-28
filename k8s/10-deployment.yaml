@@ -55,7 +55,7 @@ spec:
           terminationGracePeriodSeconds: 1
         readinessProbe:
           httpGet:
-            path: /
+            path: /ip
             port: 8080
           initialDelaySeconds: 2
           periodSeconds: 10
