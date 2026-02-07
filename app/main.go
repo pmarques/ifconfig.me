@@ -8,8 +8,10 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/pmarques/ifconfig.me/handlers/health"
 	"github.com/pmarques/ifconfig.me/handlers/ip"
 
+	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp"
@@ -17,7 +19,6 @@ import (
 	"go.opentelemetry.io/otel/sdk/resource"
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.17.0"
-	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 )
 
 type Error struct {
@@ -91,6 +92,10 @@ func main() {
 	ipHandler := http.HandlerFunc(ip.Handler)
 	wrappedIpHandler := otelhttp.NewHandler(ipHandler, "ip")
 	http.Handle("/ip", wrappedIpHandler)
+
+	healthHandler := http.HandlerFunc(health.Handler)
+	wrappedHealthHandler := otelhttp.NewHandler(healthHandler, "healthz")
+	http.Handle("/healthz", wrappedHealthHandler)
 
 	bindAddr := fmt.Sprintf("%s:%d", *listenAddr, *listenPort)
 	fmt.Println(`Start listening at "` + bindAddr + `"`)
