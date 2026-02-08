@@ -32,7 +32,7 @@ jobs:
   tests:
     strategy:
       matrix:
-        go: [ '1.25' ]
+        go: [ '1.25.7' ]
     runs-on: ubuntu-latest
     name: Run tests with go version ${{ matrix.go }}
     steps:
