@@ -11,7 +11,7 @@ I'm using this project for demos and learning about Docker, Go and experiment so
 
 ## Requirements
 
- * GO >=1.9 (otherwise the steps in this readme will not work)
+ * GO >=1.25.7 (otherwise the steps in this readme will not work)
 
 ## Development
 
