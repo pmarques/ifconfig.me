@@ -9,13 +9,13 @@ on:
   push:
     branches: [ "master" ]
 
-permissions:
-  actions: read
-  contents: read
+permissions: {}
 
 jobs:
   scan-scheduled:
     permissions:
+      actions: read
+      contents: read
       # Require writing security events to upload SARIF file to security tab
       security-events: write
     uses: "google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@c5996e0193a3df57d695c1b8a1dec2a4c62e8730" # v2.3.3
