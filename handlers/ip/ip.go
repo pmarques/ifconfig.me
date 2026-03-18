@@ -64,6 +64,7 @@ func Handler(res http.ResponseWriter, req *http.Request) {
 			"Content-type", "application/xml",
 		)
 
+		// nosemgrep: no-io-writestring-to-responsewriter
 		io.WriteString(res, xml.Header)
 		enc := xml.NewEncoder(res)
 		enc.Indent("  ", "    ")

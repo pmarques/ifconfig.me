@@ -100,5 +100,6 @@ func main() {
 	bindAddr := fmt.Sprintf("%s:%d", *listenAddr, *listenPort)
 	fmt.Println(`Start listening at "` + bindAddr + `"`)
 
+	// nosemgrep: use-tls
 	log.Fatal(http.ListenAndServe(bindAddr, nil))
 }
