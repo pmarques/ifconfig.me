@@ -10,7 +10,7 @@ I'm using this project for demos and learning about Docker, Go and experiment so
 
 ## Requirements
 
- * GO >=1.26.1 (otherwise the steps in this readme will not work)
+ * GO >=1.26.2
 
 ## Development
 
