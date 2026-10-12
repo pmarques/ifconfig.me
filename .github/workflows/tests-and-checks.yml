@@ -27,7 +27,7 @@ jobs:
       - id: govulncheck
         uses: golang/govulncheck-action@032d45514ae346b1db93c04b0c90b841c370344f # v1
         with:
-          go-version-input: 1.26
+          go-version-file: 'go.mod'
 
   tests:
     runs-on: ubuntu-latest

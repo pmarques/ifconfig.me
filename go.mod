@@ -1,6 +1,6 @@
 module github.com/pmarques/ifconfig.me
 
-go 1.26.2
+go 1.27.2
 
 require (
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.72.0
